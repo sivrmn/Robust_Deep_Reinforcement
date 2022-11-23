@@ -1,0 +1,10 @@
+def build_model():
+    print("Now we build the model")
+    model = Sequential()
+    model.add(Dense(4, input_dim = 4, activation = 'relu'))
+    model.add(Dense(4, activation = 'sigmoid'))
+    model.add(Dense(2, activation = 'relu'))
+   
+    model.compile(loss = 'mse', optimizer = 'sgd')
+    print("We finish building the model")
+    return model    

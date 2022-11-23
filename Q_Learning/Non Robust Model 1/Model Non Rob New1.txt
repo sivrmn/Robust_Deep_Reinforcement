@@ -1,0 +1,44 @@
+#==============================================================================
+# Program Constants
+#==============================================================================
+
+OBSERVATION = 10000 # Timesteps to observe before training
+
+GAMMA = 0.99 # Decay rate of past observations
+
+#-- Exploration - Explotiation balance --#
+EXPLORE = 500000 # Frames over which to anneal epsilon
+FINAL_EPSILON = 0.05 # Final value of epsilon
+INITIAL_EPSILON = 0.8 # Starting value of epsilon
+
+#-- Training parameters --#
+TRAIN_INTERVAL = 1
+REPLAY_MEMORY = 200000 # Number of previous transitions to remember
+BATCH = 32 # Size of minibatch
+FRAME_PER_ACTION = 1
+LEARNING_RATE = 1e-4
+
+
+#-- Reward selection --#
+REWARD_LOSS = -1
+REWARD_NOLOSS = 0.1
+#==============================================================================
+
+
+#==============================================================================
+# Building Q-Function model structure
+#==============================================================================
+def build_model():
+    print("Now we build the model")
+    model = Sequential()
+    model.add(Dense(4, input_dim = 4, activation = 'relu'))
+    model.add(Dense(8, activation = 'relu'))
+    model.add(Dense(8, activation = 'relu'))
+    model.add(Dense(2, activation = 'relu'))
+   
+    adam = Adam(lr=LEARNING_RATE)
+    model.compile(loss='mse',optimizer=adam)    
+    #model.compile(loss = 'mse', optimizer = 'sgd')
+    print("We finish building the model")
+    return model    
+#==============================================================================
